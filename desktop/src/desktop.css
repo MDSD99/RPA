@@ -1,0 +1,80 @@
+.desktop-license-note {
+  position: fixed;
+  bottom: 0;
+  left: 248px;
+  right: 0;
+  padding: 8px 24px;
+  background: #e5f1eb;
+  color: #264b3d;
+  font-size: 12px;
+  text-align: center;
+  z-index: 4;
+}
+.desktop-account-dialog {
+  width: min(480px, 90vw);
+  border: 1px solid #dce3de;
+  border-radius: 20px;
+  padding: 32px;
+  color: #203a31;
+  background: #fafbf8;
+  box-shadow: 0 20px 90px #152e2930;
+}
+.desktop-account-dialog::backdrop {
+  background: #182a2460;
+  backdrop-filter: blur(3px);
+}
+.desktop-dialog-body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.desktop-dialog-body h2 {
+  font-size: 24px;
+  margin: 0;
+}
+.desktop-dialog-body p {
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0;
+}
+.desktop-login {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.desktop-login input {
+  border: 1px solid #ccd9d1;
+  border-radius: 8px;
+  padding: 12px;
+  font: inherit;
+}
+.desktop-close {
+  position: absolute;
+  right: 16px;
+  top: 12px;
+  background: none;
+  border: none;
+  font-size: 26px;
+  cursor: pointer;
+  color: #61776a;
+}
+.desktop-error {
+  color: #a03c32 !important;
+  min-height: 20px;
+}
+[data-workspace="desktop"] [data-action="demo"],
+[data-workspace="desktop"] [data-action="new-job"],
+[data-workspace="desktop"] [data-action="add-record"],
+[data-workspace="desktop"] [data-action="recover"],
+[data-workspace="desktop"] [data-action="finalize"],
+[data-workspace="desktop"] [data-outcome],
+[data-workspace="desktop"] [data-nav="workers"],
+[data-workspace="desktop"] [data-nav="schedules"],
+[data-workspace="desktop"] [data-flow-action="schedule"] {
+  display: none !important;
+}
+@media (max-width: 1000px) {
+  .desktop-license-note {
+    left: 0;
+  }
+}

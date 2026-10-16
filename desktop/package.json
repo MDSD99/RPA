@@ -1,0 +1,55 @@
+{
+  "name": "multirpa-desktop",
+  "productName": "MultiRPA",
+  "version": "0.1.0",
+  "description": "MultiRPA local automation workspace",
+  "author": "MultiRPA",
+  "private": true,
+  "main": "src/main.cjs",
+  "scripts": {
+    "prepare:renderer": "node scripts/prepare-renderer.cjs",
+    "start": "npm run prepare:renderer && electron .",
+    "test": "node --test test/*.test.cjs",
+    "build:linux": "npm run prepare:renderer && node scripts/build-linux.cjs",
+    "build:windows": "npm run prepare:renderer && electron-builder --win nsis --publish never",
+    "format:check": "prettier --check src scripts/*.cjs test package.json"
+  },
+  "devDependencies": {
+    "electron": "44.5.1",
+    "electron-builder": "26.15.3",
+    "prettier": "3.9.9"
+  },
+  "build": {
+    "appId": "com.multirpa.desktop",
+    "asar": true,
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "src/**",
+      "renderer/**",
+      "deployment.json",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "runner-dist/multirpa-runner",
+        "to": "runner"
+      }
+    ],
+    "linux": {
+      "category": "Office",
+      "target": "tar.gz",
+      "icon": "assets/icon.png"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "assets/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    },
+    "beforePack": "scripts/check-runner.cjs"
+  }
+}

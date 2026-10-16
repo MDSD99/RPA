@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="tr" data-product-name="__PRODUCT_NAME__">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Yönetim · __PRODUCT_NAME__</title>
+    <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="/static/portal.css">
+    <script type="module" src="/static/admin.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">İçeriğe geç</a>
+    <header class="portal-header"><a class="brand" href="/" aria-label="__PRODUCT_NAME__ ana sayfa"><img src="/static/brand.svg" alt="__PRODUCT_NAME__" width="179" height="40"></a><span class="badge">Yönetici alanı</span></header>
+    <main id="main" class="admin-layout">
+      <div id="notice" class="notice" role="status" aria-live="polite" tabindex="-1" hidden></div>
+      <p id="loading" class="loading" role="status">Yönetici oturumunuz kontrol ediliyor…</p>
+      <noscript><p class="notice notice-error">Yönetim işlemleri için tarayıcınızda JavaScript’i etkinleştirin.</p></noscript>
+      <section id="admin-login-view" class="auth-view admin-login" aria-labelledby="admin-login-title" hidden>
+        <p class="eyebrow">YETKİLİ ERİŞİM</p><h2 id="admin-login-title">Yönetici girişi.</h2><p class="section-copy">Yönetici hesabınız ve doğrulayıcı uygulamanızdaki güncel kodla giriş yapın.</p>
+        <form id="admin-login-form">
+          <div class="field"><label for="admin-email">E-posta adresi</label><input id="admin-email" name="email" type="email" autocomplete="username" maxlength="254" required></div>
+          <div class="field"><label for="admin-password">Parola</label><input id="admin-password" name="password" type="password" autocomplete="current-password" maxlength="128" required></div>
+          <div class="field"><label for="admin-totp">Doğrulama kodu</label><input id="admin-totp" name="totp" type="text" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" minlength="6" maxlength="6" aria-describedby="admin-totp-hint" required><p class="field-hint" id="admin-totp-hint">Doğrulayıcı uygulamanızdaki 6 haneli kodu girin.</p></div>
+          <button class="button full-width" type="submit">Yönetim alanına giriş yap <span aria-hidden="true">↗</span></button>
+        </form>
+      </section>
+      <section id="admin-accounts-view" aria-labelledby="accounts-title" hidden>
+        <div class="admin-heading"><div><p class="eyebrow">MULTIRPA YÖNETİMİ</p><h1 id="accounts-title">Hesap başvuruları.</h1><p>E-posta doğrulamasını kontrol edin, başvuruları değerlendirin.</p></div><div class="admin-identity"><span id="admin-identity"></span><button type="button" id="admin-logout-button" class="text-button">Çıkış yap</button></div></div>
+        <div class="accounts-panel">
+          <div class="accounts-toolbar"><div><h2>Hesaplar</h2><p id="account-total" aria-live="polite">Hesaplar yükleniyor…</p></div><button type="button" id="accounts-refresh-button" class="text-button">Listeyi yenile <span aria-hidden="true">↻</span></button></div>
+          <table class="accounts-table" aria-label="Müşteri hesapları"><thead><tr><th scope="col">Hesap</th><th scope="col">E-posta</th><th scope="col">Başvuru</th><th scope="col">İşlemler</th></tr></thead><tbody id="accounts-body"></tbody></table>
+          <p id="empty-accounts" class="empty-state" hidden>Henüz bir hesap başvurusu yok.</p>
+          <div class="pagination"><p id="page-summary" aria-live="polite"></p><div><button type="button" id="previous-page" class="button button-secondary" disabled>Önceki</button><button type="button" id="next-page" class="button button-secondary" disabled>Sonraki</button></div></div>
+        </div>
+        <section id="decision-panel" class="decision-panel" aria-labelledby="decision-title" hidden>
+          <h2 id="decision-title"></h2><p id="decision-account"></p><p id="decision-description"></p>
+          <form id="decision-form"><div class="field"><label for="decision-reason">İşlem gerekçesi</label><textarea id="decision-reason" name="reason" rows="3" minlength="3" maxlength="500" aria-describedby="decision-reason-hint" required></textarea><p id="decision-reason-hint" class="field-hint">Bu gerekçe denetim kaydında saklanır. Parola veya başka bir hassas bilgi yazmayın.</p></div><div class="decision-buttons"><button type="submit" id="confirm-decision" class="button">İşlemi onayla</button><button type="button" id="cancel-decision" class="button button-secondary">Vazgeç</button></div></form>
+        </section>
+        <section id="license-panel" class="decision-panel" aria-labelledby="license-title" hidden>
+          <h2 id="license-title">Demo, lisans ve bilgisayar</h2><p id="license-account"></p><p id="license-status" aria-live="polite"></p>
+          <form id="license-form">
+            <div class="field"><label for="license-operation">İşlem</label><select id="license-operation" name="operation"><option value="grant">Lisans tanımla</option><option value="revoke">Ücretli lisansı kaldır</option><option value="reset">Bilgisayar bağlantısını sıfırla</option></select></div>
+            <div id="license-grant-fields"><div class="field"><label for="license-expiry">Lisans bitişi (yerel saat)</label><input id="license-expiry" name="expires_at" type="datetime-local" required></div><div class="field"><label for="license-flow-limit">Toplam akış hakkı</label><input id="license-flow-limit" name="flow_limit" type="number" min="1" max="1000" value="10" required></div></div>
+            <div class="field"><label for="license-reason">Lisans işlemi gerekçesi</label><textarea id="license-reason" name="reason" rows="3" minlength="3" maxlength="500" required></textarea></div>
+            <p class="field-hint">Bilgisayar sıfırlama sonrasında önceki izin kapanana kadar en fazla bir dakika beklenir. Demo başlangıcı ve kullanılan akış sayısı korunur.</p>
+            <div class="decision-buttons"><button type="submit" class="button">Uygula</button><button type="button" id="close-license" class="button button-secondary">Kapat</button></div>
+          </form>
+        </section>
+      </section>
+    </main>
+    <footer class="portal-footer">__PRODUCT_NAME__ <span aria-hidden="true">·</span> Hesap yönetimi</footer>
+  </body>
+</html>

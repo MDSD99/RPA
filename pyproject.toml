@@ -1,0 +1,86 @@
+[build-system]
+requires = ["setuptools>=75,<83"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "multirpa"
+version = "0.1.0"
+description = "MultiRPA automation platform and execution engine"
+requires-python = ">=3.11"
+dependencies = [
+  "SQLAlchemy>=2.0.36,<2.1",
+  "psycopg[binary]>=3.2,<4",
+  "alembic>=1.14,<2",
+  "fastapi>=0.115,<1",
+  "uvicorn>=0.34,<1",
+  "argon2-cffi>=25.1,<26",
+  "cryptography>=46,<49",
+  "email-validator>=2.2,<3",
+  "pyotp>=2.9,<3",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.3,<10", "ruff>=0.9,<1", "httpx>=0.28,<1", "mypy>=1.19,<2", "types-openpyxl>=3.1,<4", "types-defusedxml>=0.7,<1"]
+browser = ["playwright>=1.50,<2"]
+automation = ["openpyxl>=3.1.5,<4", "defusedxml>=0.7.1,<1"]
+windows = ["pywinauto>=0.6.8,<0.7; sys_platform == 'win32'"]
+desktop-build = ["pyinstaller>=6.20,<7"]
+
+[tool.setuptools.packages.find]
+include = ["app*"]
+
+[tool.setuptools.package-data]
+"app.web" = ["static/*", "templates/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra -m 'not browser'"
+markers = [
+  "postgres: requires the explicitly configured isolated PostgreSQL test database",
+  "browser: requires project-local Chromium and the isolated PostgreSQL database",
+]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.mypy]
+files = [
+  "app/identity",
+  "app/core/portal_config.py",
+  "app/web/portal.py",
+  "app/web/portal_runtime.py",
+  "app/web/routes/customer.py",
+  "app/web/routes/entitlements.py",
+  "app/entitlements",
+  "app/desktop",
+  "app/secrets",
+  "app/web/routes/secrets.py",
+  "app/services/download_service.py",
+  "app/adapters/mail_automation.py",
+  "app/adapters/automation_actions.py",
+  "app/adapters/automation_files.py",
+  "app/adapters/automation_http.py",
+  "app/adapters/automation_policy.py",
+  "app/workflows/automation_contract.py",
+  "app/workflows/flow_transfer.py",
+  "app/workflows/node_contract.py",
+  "app/services/mail_service.py",
+  "app/services/rate_limit_service.py",
+  "app/database/repositories/mail_repository.py",
+  "app/database/repositories/rate_limit_repository.py",
+  "app/database/portal_limits.py",
+  "app/database/schema.py",
+  "app/adapters/smtp_mail.py",
+]
+follow_imports = "silent"
+check_untyped_defs = true
+disallow_incomplete_defs = true
+disallow_untyped_defs = true
+disallow_any_generics = true
+no_implicit_optional = true
+warn_unused_ignores = true
+show_error_codes = true

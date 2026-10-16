@@ -1,0 +1,15 @@
+{
+  "remote.autoForwardPorts": true,
+  "remote.portsAttributes": {
+    "8765": {
+      "label": "MultiRPA",
+      "onAutoForward": "openBrowser",
+      "requireLocalPort": true
+    },
+    "8770": {
+      "label": "MultiRPA Müşteri Portalı",
+      "onAutoForward": "notify",
+      "requireLocalPort": true
+    }
+  }
+}

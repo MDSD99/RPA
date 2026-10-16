@@ -1,0 +1,38 @@
+[Unit]
+Description=MultiRPA __DESCRIPTION__
+After=network-online.target
+Wants=network-online.target
+StartLimitIntervalSec=60
+StartLimitBurst=5
+
+[Service]
+Type=simple
+User=__USER__
+Group=__USER__
+WorkingDirectory=__INSTALL_DIR__
+Environment=PYTHONUNBUFFERED=1
+Environment=PYTHONDONTWRITEBYTECODE=1
+__ENVIRONMENT_FILES__
+ExecStart=__INSTALL_DIR__/.venv/bin/python -m scripts.portal __COMMAND__
+Restart=on-failure
+RestartSec=5
+KillSignal=SIGTERM
+TimeoutStopSec=150
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+CapabilityBoundingSet=
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+LockPersonality=true
+StateDirectory=multirpa
+ReadWritePaths=/var/lib/multirpa
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

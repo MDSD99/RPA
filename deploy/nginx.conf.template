@@ -1,0 +1,61 @@
+# Rendered for explicitly supplied MultiRPA domains. No default_server is changed.
+server {
+    listen 80;
+    server_name __ROOT_HOST__;
+    return 301 __ROOT_URL__$request_uri;
+}
+server {
+    listen 80;
+    server_name __APP_HOST__;
+    return 301 __APP_URL__$request_uri;
+}
+server {
+    listen 443 ssl;
+    server_name __ROOT_HOST__;
+    ssl_certificate /etc/letsencrypt/live/__ROOT_HOST__/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/__ROOT_HOST__/privkey.pem;
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_session_tickets off;
+    add_header Strict-Transport-Security "max-age=31536000" always;
+    add_header Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'" always;
+    add_header X-Content-Type-Options nosniff always;
+    add_header Referrer-Policy no-referrer always;
+    access_log off;
+    # Verification/reset tokens must not enter nginx request error diagnostics.
+    error_log /dev/null crit;
+    root __MARKETING_DIR__;
+    location = / { try_files /index.html =404; }
+    location /static/ { try_files $uri =404; }
+    location = /account { return 302 __APP_URL__/account$is_args$args; }
+    location / { return 404; }
+}
+server {
+    listen 443 ssl;
+    server_name __APP_HOST__;
+    ssl_certificate /etc/letsencrypt/live/__APP_HOST__/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/__APP_HOST__/privkey.pem;
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_session_tickets off;
+    add_header Strict-Transport-Security "max-age=31536000" always;
+    access_log off;
+    error_log /dev/null crit;
+    client_max_body_size 128k;
+    client_body_timeout 15s;
+    location / {
+        proxy_pass http://127.0.0.1:__PORT__;
+        proxy_http_version 1.1;
+        proxy_set_header Host __APP_HOST__;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        # Replace untrusted incoming forwarding headers; trust this local hop only.
+        proxy_set_header X-Forwarded-For $remote_addr;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header Forwarded "";
+        proxy_set_header X-Forwarded-Host "";
+        proxy_set_header Connection "";
+        proxy_connect_timeout 5s;
+        proxy_read_timeout 30s;
+        proxy_send_timeout 30s;
+        proxy_cache off;
+        proxy_next_upstream off;
+    }
+}

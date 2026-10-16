@@ -1,0 +1,18 @@
+# Exact desktop runtime closure; central DB/API packages are not distributed.
+cryptography==48.0.1
+cffi==2.1.1
+pycparser==3.0
+playwright==1.62.0
+greenlet==3.5.5
+pyee==13.0.1
+typing_extensions==4.16.0
+email-validator==2.3.0
+dnspython==2.8.0
+idna==3.19
+openpyxl==3.1.5
+et_xmlfile==2.0.0
+defusedxml==0.7.1
+pywinauto==0.6.8; sys_platform == 'win32'
+comtypes==1.4.16; sys_platform == 'win32'
+pywin32==311; sys_platform == 'win32'
+six==1.17.0; sys_platform == 'win32'

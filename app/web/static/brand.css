@@ -1,0 +1,54 @@
+:root {
+  --brand-ink: #12383b;
+  --brand-accent: #63e5c0;
+  --brand-paper: #f2fff9;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 6px 51px;
+  color: var(--brand-paper);
+  font-size: 25px;
+  font-weight: 700;
+  letter-spacing: -1px;
+  line-height: 1;
+}
+
+.brand-symbol {
+  display: block;
+  flex: 0 0 38px;
+  width: 38px;
+  height: 38px;
+}
+
+.brand-wordmark {
+  white-space: nowrap;
+}
+
+@media (max-width: 1200px) and (min-width: 721px) {
+  .brand {
+    gap: 8px;
+    margin-inline: 0;
+    font-size: 22px;
+  }
+
+  .brand-symbol {
+    flex-basis: 34px;
+    width: 34px;
+    height: 34px;
+  }
+}
+/* The shared editor is used by customer web and Electron workspaces. */
+html[data-workspace] [data-action="demo"],
+html[data-workspace] [data-action="new-job"],
+html[data-workspace] [data-action="add-record"],
+html[data-workspace] [data-nav="workers"],
+html[data-workspace="desktop"] [data-nav="schedules"],
+html[data-workspace="desktop"] [data-flow-action="schedule"] { display: none !important; }
+html:not([data-workspace]) .credential-menu { display: none; }
+.credential-menu { margin: 10px 16px; justify-content: center; }
+.credential-list { display: grid; gap: 8px; margin: 0 0 20px; }
+.credential-item { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.credential-item strong { margin-right: auto; overflow-wrap: anywhere; }

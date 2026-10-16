@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="tr" data-product-name="__PRODUCT_NAME__">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Hesabım · __PRODUCT_NAME__</title>
+    <link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="/static/portal.css">
+    <script type="module" src="/static/portal.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">İçeriğe geç</a>
+    <header class="portal-header">
+      <a class="brand" href="/" aria-label="__PRODUCT_NAME__ ana sayfa"><img src="/static/brand.svg" alt="__PRODUCT_NAME__" width="179" height="40"></a>
+      <a class="back-link" href="/">Ana sayfa <span aria-hidden="true">↗</span></a>
+    </header>
+    <main id="main" class="account-layout">
+      <aside class="account-intro" aria-labelledby="intro-title">
+        <p class="eyebrow">DAHA AZ TEKRAR. DAHA FAZLA ZAMAN.</p>
+        <h1 id="intro-title">İşleriniz için<br>yeni bir akış.</h1>
+        <p>MultiRPA hesabınızla otomasyon yolculuğunuza ilk adımı atın.</p>
+        <ol class="intro-steps">
+          <li><span>01</span><div>Hesabınızı oluşturun<small>E-posta adresinizle kayıt olun.</small></div></li>
+          <li><span>02</span><div>E-postanızı doğrulayın<small>Size gönderilen bağlantıyı onaylayın.</small></div></li>
+          <li><span>03</span><div>Onayınızı takip edin<small>Başvurunuz yönetici tarafından değerlendirilir.</small></div></li>
+        </ol>
+        <div class="intro-footer"><img src="/static/brand-mark.svg" width="28" height="28" alt=""><span>Her iyi iş, bir adımla başlar.</span></div>
+      </aside>
+      <div class="account-content">
+        <p id="loading" class="loading" role="status">Hesabınız kontrol ediliyor…</p>
+        <div id="notice" class="notice" role="status" aria-live="polite" tabindex="-1" hidden></div>
+        <noscript><p class="notice notice-error">Hesap işlemleri için tarayıcınızda JavaScript’i etkinleştirin.</p></noscript>
+        <section id="login-view" class="auth-view" aria-labelledby="login-title" hidden>
+          <p class="eyebrow">TEKRAR HOŞ GELDİNİZ</p><h2 id="login-title">Hesabınıza giriş yapın.</h2><p class="section-copy">Hesap durumunuzu buradan takip edin.</p>
+          <form id="login-form">
+            <div class="field"><label for="login-email">E-posta adresi</label><input id="login-email" name="email" type="email" autocomplete="username" maxlength="254" required></div>
+            <div class="field"><div class="label-row"><label for="login-password">Parola</label><button type="button" class="text-button" data-view="password-request">Parolamı unuttum</button></div><input id="login-password" name="password" type="password" autocomplete="current-password" maxlength="128" required></div>
+            <button class="button full-width" type="submit">Giriş yap <span aria-hidden="true">↗</span></button>
+          </form>
+          <p class="switch-copy">Henüz hesabınız yok mu? <button type="button" class="text-button" data-view="register">Hesap oluşturun</button></p>
+          <p class="support-copy">Doğrulama iletisi ulaşmadı mı? <button type="button" class="text-button" data-view="verification-request">Yeniden gönderin</button></p>
+        </section>
+        <section id="register-view" class="auth-view" aria-labelledby="register-title" hidden>
+          <p class="eyebrow">MULTIRPA’YA KATILIN</p><h2 id="register-title">Hesabınızı oluşturun.</h2><p class="section-copy">E-postanızı doğruladıktan sonra başvurunuz yönetici onayına sunulur.</p>
+          <form id="register-form">
+            <div class="field"><label for="register-name">Ad soyad</label><input id="register-name" name="display_name" autocomplete="name" maxlength="120" required></div>
+            <div class="field"><label for="register-email">E-posta adresi</label><input id="register-email" name="email" type="email" autocomplete="username" maxlength="254" required></div>
+            <div class="field"><label for="register-password">Parola</label><input id="register-password" name="password" type="password" autocomplete="new-password" minlength="15" maxlength="128" aria-describedby="register-password-hint" required><p id="register-password-hint" class="field-hint">15–128 karakter kullanın. Birkaç sözcükten oluşan uzun bir parola seçebilirsiniz.</p></div>
+            <button class="button full-width" type="submit">Hesap oluştur <span aria-hidden="true">↗</span></button>
+          </form>
+          <p class="switch-copy">Zaten hesabınız var mı? <button type="button" class="text-button" data-view="login">Giriş yapın</button></p>
+        </section>
+        <section id="verification-request-view" class="auth-view" aria-labelledby="verification-request-title" hidden>
+          <p class="eyebrow">E-POSTA DOĞRULAMA</p><h2 id="verification-request-title">Bağlantınız yeniden gelsin.</h2><p class="section-copy">Hesabınıza ait e-posta adresini yazın. Uygun bir hesap varsa yeni doğrulama bağlantısı gönderilir.</p>
+          <form id="verification-request-form"><div class="field"><label for="verification-email">E-posta adresi</label><input id="verification-email" name="email" type="email" autocomplete="email" maxlength="254" required></div><button class="button full-width" type="submit">Doğrulama bağlantısı iste</button></form>
+          <p class="switch-copy"><button type="button" class="text-button" data-view="login">Girişe dön</button></p>
+        </section>
+        <section id="verify-view" class="auth-view" aria-labelledby="verify-title" hidden>
+          <span class="state-icon" aria-hidden="true">@</span><p class="eyebrow">BİR ADIM KALDI</p><h2 id="verify-title">E-postanızı doğrulayın.</h2><p class="section-copy">Bu bağlantının size ait olduğunu doğrulamak için aşağıdaki düğmeye basın.</p>
+          <form id="verify-form"><button class="button full-width" type="submit">E-posta adresimi doğrula</button></form>
+          <p class="switch-copy"><button type="button" class="text-button" data-view="verification-request">Yeni bağlantı iste</button></p>
+        </section>
+        <section id="password-request-view" class="auth-view" aria-labelledby="password-request-title" hidden>
+          <p class="eyebrow">HESABINIZA YENİDEN ULAŞIN</p><h2 id="password-request-title">Parolanızı yenileyin.</h2><p class="section-copy">Hesabınıza ait e-posta adresini yazın. Uygun bir hesap varsa parola yenileme bağlantısı gönderilir.</p>
+          <form id="password-request-form"><div class="field"><label for="password-request-email">E-posta adresi</label><input id="password-request-email" name="email" type="email" autocomplete="email" maxlength="254" required></div><button class="button full-width" type="submit">Parola yenileme bağlantısı iste</button></form>
+          <p class="switch-copy"><button type="button" class="text-button" data-view="login">Girişe dön</button></p>
+        </section>
+        <section id="password-reset-view" class="auth-view" aria-labelledby="password-reset-title" hidden>
+          <p class="eyebrow">YENİ BİR BAŞLANGIÇ</p><h2 id="password-reset-title">Yeni parolanızı belirleyin.</h2><p class="section-copy">Parola değiştiğinde açık oturumlar kapatılır. Yeni parolanızla tekrar giriş yapabilirsiniz.</p>
+          <form id="password-reset-form"><div class="field"><label for="reset-password">Yeni parola</label><input id="reset-password" name="password" type="password" autocomplete="new-password" minlength="15" maxlength="128" aria-describedby="reset-password-hint" required><p id="reset-password-hint" class="field-hint">15–128 karakter kullanın.</p></div><button class="button full-width" type="submit">Parolamı yenile</button></form>
+          <p class="switch-copy"><button type="button" class="text-button" data-view="password-request">Yeni bağlantı iste</button></p>
+        </section>
+        <section id="status-view" class="auth-view" aria-labelledby="status-title" hidden>
+          <div class="status-heading"><p class="eyebrow">HESABIM</p><button type="button" id="logout-button" class="text-button">Çıkış yap</button></div>
+          <h2 id="status-title">Hoş geldiniz.</h2><p id="account-email" class="account-email"></p>
+          <div class="account-state"><span id="account-state-label" class="badge"></span><h3 id="account-state-title"></h3><p id="account-state-copy"></p></div>
+          <ol class="progress-list" aria-label="Hesap açılış adımları"><li id="email-progress"><span class="progress-dot" aria-hidden="true"></span><span>E-posta doğrulaması</span><strong id="email-progress-label"></strong></li><li id="approval-progress"><span class="progress-dot" aria-hidden="true"></span><span>Yönetici onayı</span><strong id="approval-progress-label"></strong></li></ol>
+          <section id="trial-panel" class="account-state" hidden aria-label="Demo ve lisans">
+            <span id="trial-label" class="badge"></span><h3 id="trial-title"></h3><p id="trial-copy"></p>
+            <p id="trial-quota"></p>
+            <div class="status-actions"><button type="button" id="start-trial-button" class="button" hidden>Demo sürümünü başlat</button><a id="workspace-link" class="button" href="/workspace" hidden>Çalışma alanını aç ↗</a></div>
+          </section>
+          <section id="downloads-panel" class="account-state" hidden aria-label="Masaüstü uygulaması"><h3>MultiRPA masaüstü</h3><p>Bilgisayarınızda akış oluşturun ve çalıştırın. İlk etkinleştirmede hesabınız tek bilgisayara bağlanır; demo süreniz web ile ortaktır.</p><div id="downloads-list"></div><p id="downloads-empty">Masaüstü sürümü hazırlanıyor.</p></section>
+          <div class="status-actions"><button type="button" id="refresh-button" class="button button-secondary">Durumu yenile</button><button type="button" id="resend-button" class="text-button" hidden>Doğrulama bağlantısını yeniden gönder</button></div>
+          <p class="release-note">Akış çalışma alanı, 3 akışlık bir aylık deneme ve masaüstü uygulaması bir sonraki aşamada hesabınıza eklenecek. Henüz deneme süreniz başlamadı.</p>
+        </section>
+      </div>
+    </main>
+    <footer class="portal-footer">__PRODUCT_NAME__ <span aria-hidden="true">·</span> İşler aksın.</footer>
+  </body>
+</html>

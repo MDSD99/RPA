@@ -1,0 +1,22 @@
+# Development only. Production uses a separately managed private PostgreSQL.
+services:
+  postgres:
+    image: postgres:17@sha256:67f41722b7a8cbdb868a44a4995c846eddfdc2973bccb291ce937dce88ad5675
+    environment:
+      POSTGRES_DB: ${DB_NAME:?Set a development-only DB_NAME}
+      POSTGRES_USER: ${DB_USER:?Set a development-only DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?Set a development-only DB_PASSWORD}
+    ports:
+      - "127.0.0.1:${DB_PORT:-55432}:5432"
+    volumes:
+      - postgres_dev:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -q -h 127.0.0.1 -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    labels:
+      com.rpa.purpose: development
+
+volumes:
+  postgres_dev:
